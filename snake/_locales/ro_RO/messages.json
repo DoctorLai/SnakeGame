@@ -1,10 +1,10 @@
 {
-      "appName": {
-         "message": "Simplu joc de șarpe",
-         "description": "Simplu joc de șarpe: ușor accesibil atunci când doriți să jucați jocul clasic de șarpe."
-       },
-       "appDesc": {
-         "message": "Simplu joc de șarpe",
-         "description": "Simplu joc de șarpe: ușor accesibil atunci când doriți să jucați jocul clasic de șarpe."
-      }
+  "appName": {
+    "message": "Simplu joc de șarpe",
+    "description": "Simplu joc de șarpe: ușor accesibil atunci când doriți să jucați jocul clasic de șarpe."
+  },
+  "appDesc": {
+    "message": "Simplu joc de șarpe",
+    "description": "Simplu joc de șarpe: ușor accesibil atunci când doriți să jucați jocul clasic de șarpe."
   }
+}

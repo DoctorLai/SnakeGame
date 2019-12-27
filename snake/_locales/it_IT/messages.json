@@ -1,10 +1,10 @@
 {
    "appName": {
      "message": "Simple Snake Game",
-     "description": "Semplice gioco del serpente: facilmente accessibile quando si desidera giocare al classico gioco del serpente"
-   },
-   "appDesc": {
-     "message": "Simple Snake Game",
-     "description": "Semplice gioco del serpente: facilmente accessibile quando si desidera giocare al classico gioco del serpente"
+     "description": "Semplice gioco del serpente: facilmente accessibile quando si desidera giocare al classico gioco del serpente"
+   },
+   "appDesc": {
+     "message": "Simple Snake Game",
+     "description": "Semplice gioco del serpente: facilmente accessibile quando si desidera giocare al classico gioco del serpente"
    }
-}
+ }
