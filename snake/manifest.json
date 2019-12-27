@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "Simple Snake Game",
+  "default_locale": "en",
+  "short_name": "SnakeGame",  
+  "version": "1.0",
+  "browser_action": {
+     "default_icon": "icon.png",
+     "default_title": "Simple Snake Game",
+     "default_popup": "main.html"
+  },
+  "offline_enabled": true,
+  "author": "justyy<dr.zhihua.lai@gmail.com>",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },  
+  "description": "Classic Snake Game in Your Browser",
+  "web_accessible_resources": [
+  		"js/*", 
+  		"images/*",
+  		"bs/*"
+  ],
+  "permissions": [
+     "activeTab",
+     "storage",
+     "tabs"
+  ],
+  "background": {
+    "scripts": ["js/background.js"]
+  },  
+  "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js":[
+          "js/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+  }]  
+}
