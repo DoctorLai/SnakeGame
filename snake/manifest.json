@@ -24,19 +24,9 @@
   		"bs/*"
   ],
   "permissions": [
-     "activeTab",
-     "storage",
-     "tabs"
+     "storage"
   ],
   "background": {
     "scripts": ["js/background.js"]
-  },  
-  "content_scripts": [{
-      "matches": ["<all_urls>"],
-      "js":[
-          "js/contentscript.js"
-      ],
-      "run_at": "document_end",
-      "all_frames": false
-  }]  
+  } 
 }
