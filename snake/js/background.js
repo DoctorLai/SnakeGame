@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    
+        
     if (chrome && chrome.runtime && chrome.runtime.onMessage) {
         chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
             switch (message.type) {
