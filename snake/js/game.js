@@ -41,10 +41,10 @@ function windowload() {
   requestAnimationFrame(loop);
 }
 
-var grid = 16;
-var count = 0;
+let grid = 16;
+let count = 0;
 
-var snake = {
+let snake = {
   x: 160,
   y: 160,
 
@@ -58,10 +58,18 @@ var snake = {
   // length of the snake. grows when eating an apple
   maxCells: 4
 };
-var apple = {
+let apple = {
   x: 320,
   y: 320
 };
+
+if (Math.random() < 0.5) {
+  snake.dx = grid;
+  snake.dy = 0;
+} else {
+  snake.dx = 0;
+  snake.dy = grid;
+}
 
 // get random whole numbers in a specific range
 // @see https://stackoverflow.com/a/1527820/2124254
@@ -82,8 +90,13 @@ function resetGame() {
   snake.y = 160;
   snake.cells = [];
   snake.maxCells = 4;
-  snake.dx = grid;
-  snake.dy = 0;
+  if (Math.random() < 0.5) {
+    snake.dx = grid;
+    snake.dy = 0;
+  } else {
+    snake.dx = 0;
+    snake.dy = grid;
+  }
   score = 0;
   showScore(score);
   apple.x = getRandomInt(0, 25) * grid;
@@ -94,8 +107,8 @@ function resetGame() {
 function loop() {
   requestAnimationFrame(loop);
 
-  // slow game loop to 15 fps instead of 60 (60/15 = 4)
-  if (++count < 4) {
+  // slow game loop to 30 fps instead of 60 (60/30 = 2)
+  if (++count < 2) {
     return;
   }
 
@@ -170,7 +183,7 @@ function loop() {
     }
 
     // check collision with all cells after this one (modified bubble sort)
-    for (var i = index + 1; i < snake.cells.length; i++) {
+    for (let i = index + 1; i < snake.cells.length; i++) {
       // snake occupies same space as a body part. reset game
       if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
         resetGame();
