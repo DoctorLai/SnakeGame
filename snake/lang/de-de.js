@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_de_de = {
+	'text_speed': 'Geschwindigkeit',
+	'text_border': 'Grenze',	
 	'score_text': 'Ergebnis',
 	'bestscore_text': 'Beste',
 	'text_game': 'Schlangenspiel',

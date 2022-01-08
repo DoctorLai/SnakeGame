@@ -107,8 +107,27 @@ function resetGame() {
 function loop() {
   requestAnimationFrame(loop);
 
+  const FAST = 2;
+  const NORMAL = 3;
+  const SLOW = 4;
+
+  let speed = NORMAL;
+  const ui_speed = document.getElementById('speed').value;
+  if (ui_speed == 0) {
+    let bodylen = snake.cells.length;
+    if (bodylen >= 25) {
+      speed = FAST;
+    } else if (bodylen >= 15) {
+      speed = NORMAL;
+    } else {
+      speed = SLOW;
+    }
+  } else {
+    speed = parseInt(ui_speed);
+  }
+
   // slow game loop to 30 fps instead of 60 (60/30 = 2)
-  if (++count < 2) {
+  if (++count < speed) {
     return;
   }
 
@@ -119,23 +138,24 @@ function loop() {
   snake.x += snake.dx;
   snake.y += snake.dy;
 
-  /*                
-  // wrap snake position horizontally on edge of screen
-  if (snake.x < 0) {
-    snake.x = canvas.width - grid;
+
+  if (document.getElementById('border').value == "ON") {
+    // wrap snake position horizontally on edge of screen
+    if (snake.x < 0) {
+      snake.x = canvas.width - grid;
+    }
+    else if (snake.x >= canvas.width) {
+      snake.x = 0;
+    }
+    
+    // wrap snake position vertically on edge of screen
+    if (snake.y < 0) {
+      snake.y = canvas.height - grid;
+    }
+    else if (snake.y >= canvas.height) {
+      snake.y = 0;
+    }
   }
-  else if (snake.x >= canvas.width) {
-    snake.x = 0;
-  }
-  
-  // wrap snake position vertically on edge of screen
-  if (snake.y < 0) {
-    snake.y = canvas.height - grid;
-  }
-  else if (snake.y >= canvas.height) {
-    snake.y = 0;
-  }
-  */
 
   if (snake.x < 0 || snake.x >= canvas.width) {
     resetGame();

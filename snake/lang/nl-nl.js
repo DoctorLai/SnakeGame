@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_nl_nl = {
+	'text_speed': 'snelheid',
+	'text_border': 'grens',	
 	'score_text': 'Partituur',
 	'bestscore_text': 'Het beste',			
 	'text_game': 'Snake Game',

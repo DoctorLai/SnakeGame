@@ -14,6 +14,8 @@ const saveSettings = (showMsg = true) => {
     let settings = {};
     settings['lang'] = $('select#lang').val();
     settings['bestscore'] = bestscore;
+    settings['speed'] = $('select#speed').val();
+    settings['border'] = $('select#border').val();
     chrome.storage.sync.set({ 
         snake_game_settings: settings
     }, function() {
@@ -36,10 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data && data.snake_game_settings) {
             const settings = data.snake_game_settings;
             const lang = settings['lang'];
+            const speed = settings['speed'] ?? "3";
+            const border = settings['border'] ?? 'OFF';
             if (settings['bestscore']) {
                 bestscore = settings['bestscore'];
             }
             $("select#lang").val(lang);
+            $("select#speed").val(speed);
+            $("select#border").val(border);
         } else {
             // first time set default parameters
         }

@@ -1,15 +1,17 @@
 "use strict";
 
 const translation_es_sp = {
-	'score_text': 'Puntuación',
-	'bestscore_text': 'Mejor',	
+	'text_speed': 'velocidad',
+	'text_border': 'frontera',	
+	'score_text': 'puntaje',
+	'bestscore_text': 'mejor puntuación',	
 	'text_game': 'Juego de serpiente',
 	'links_list': 'Lista de enlaces',
 	'links': 'Enlaces',
 	'source_code': 'Código fuente',
 	'report_bugs': 'Informar errores',
 	'text_logs': 'Historial de versiones',
-	'save': 'Guardar',
+	'save': 'ahorrar',
 	'alert_save': 'Configuraciones guardadas (Obligatorio: Recargar extensión)',
 	'ui_language': 'Idioma de la interfaz de usuario',
 	'setting': 'Configuración',

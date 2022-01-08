@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_ro_ro = {
+	'text_speed': 'viteză',
+	'text_border': 'frontieră',	
 	'score_text': 'Scor',
 	'bestscore_text': 'Cel mai bun',	
 	'text_game': 'Sarpe joc',

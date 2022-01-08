@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_pl_pl = {
+	'text_speed': 'prędkość',
+	'text_border': 'granica',	
 	'score_text': 'Wynik',
 	'bestscore_text': 'Najlepsza',	
 	'text_game': 'Gra w węża',

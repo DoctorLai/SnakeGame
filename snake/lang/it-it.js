@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_it_it = {
+	'text_speed': 'velocità',
+	'text_border': 'confine',	
 	'score_text': 'Punto',
 	'bestscore_text': 'Migliore',		
 	'text_game': 'Snake Game',
