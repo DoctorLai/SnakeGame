@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_traditional_chinese = {
+	'text_speed': '速度',
+	'text_border': '邊界',	
 	'score_text': '得分',
 	'bestscore_text': '最好',		
 	'text_game': '貪吃蛇遊戲',

@@ -22,6 +22,8 @@ const translation = (lang) => {
     translate_text($('button#setting_save_btn'), lang, 'save');
 	translate_text($('span#proudly_brought_to_you_by'), lang, 'proudly_brought_to_you_by');
     translate_text($('span#vpspromotion'), lang, 'freevps');
+    translate_text($('h4#text_speed'), lang, 'text_speed');
+    translate_text($('h4#text_border'), lang, 'text_border');
 }
 
 // get ui lang data

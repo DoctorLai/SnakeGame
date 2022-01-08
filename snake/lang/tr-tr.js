@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_tr_tr = {
+	'text_speed': 'hız',
+	'text_border': 'sınır',	
 	'score_text': 'Puan',
 	'bestscore_text': 'En iyi',		
 	'text_game': 'Yılan Oyunu',

@@ -1,6 +1,8 @@
 "use strict";
 
 const translation_ru_ru = {
+	'text_speed': 'скорость',
+	'text_border': 'граница',	
 	'score_text': 'Гол',
 	'bestscore_text': 'Лучший',	
 	'text_game': 'Змея игры',
