@@ -31,12 +31,3 @@ jobs:
 
       - name: Check
         run: npm run check
-
-      - name: Upload coverage to Codecov
-        if: matrix.node-version == '22.x'
-        uses: codecov/codecov-action@v4
-        with:
-          files: ./coverage/lcov.info
-          fail_ci_if_error: false
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
