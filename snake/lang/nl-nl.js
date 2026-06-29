@@ -20,5 +20,8 @@ const translation_nl_nl = {
 	'last_updated': 'Laatst bijgewerkt',
 	'chrome_version': 'Chrome-versie',
 	'proudly_brought_to_you_by': 'Ontwikkeld door',
-	'freevps': 'Cloud VPS Promotions'
+	'freevps': 'Cloud VPS Promotions',
+	'paused': 'Gepauzeerd',
+	'game_over': 'Game over',
+	'restart_hint': 'Druk op een toets om opnieuw te starten'
 };

@@ -20,5 +20,8 @@ const translation_ro_ro = {
 	'last_updated': 'Ultima actualizare',
 	'chrome_version': 'Versiunea Chrome',
 	'proudly_brought_to_you_by': 'Dezvoltat de',
-	'freevps': 'Promoții cloud VPS'
+	'freevps': 'Promoții cloud VPS',
+	'paused': 'Întrerupt',
+	'game_over': 'Joc terminat',
+	'restart_hint': 'Apăsați orice tastă pentru a reîncepe'
 };

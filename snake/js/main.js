@@ -4,64 +4,79 @@ const manifest = chrome.runtime.getManifest();
 const app_name = manifest.name + " v" + manifest.version;
 let bestscore = 0;
 
-function getChromeVersion() {     
-	var raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
-	return raw ? parseInt(raw[2], 10) : false;
+function getChromeVersion() {
+  var raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+  return raw ? parseInt(raw[2], 10) : false;
 }
 
 // save settings
 const saveSettings = (showMsg = true) => {
-    let settings = {};
-    settings['lang'] = $('select#lang').val();
-    settings['bestscore'] = bestscore;
-    settings['speed'] = $('select#speed').val();
-    settings['border'] = $('select#border').val();
-    chrome.storage.sync.set({ 
-        snake_game_settings: settings
-    }, function() {
-        if (showMsg) {
-            alert(get_text('alert_save'));
-        }
-    });
+  let settings = {};
+  settings["lang"] = $("select#lang").val();
+  settings["bestscore"] = bestscore;
+  settings["speed"] = $("select#speed").val();
+  settings["border"] = $("select#border").val();
+  chrome.storage.sync.set(
+    {
+      snake_game_settings: settings
+    },
+    function () {
+      if (showMsg) {
+        alert(get_text("alert_save"));
+      }
+    }
+  );
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
     // init tabs
-    $(function() {   
-        $( "#tabs" ).tabs();
-    });    
-    let about = $('textarea#about');
-    about.html('App: ' + app_name + '\nChrome Version: ' + getChromeVersion() + "\n");
+    $(function () {
+      $("#tabs").tabs();
+    });
+    let about = $("textarea#about");
+    about.html("App: " + app_name + "\nChrome Version: " + getChromeVersion() + "\n");
 
     // load settings
-    chrome.storage.sync.get('snake_game_settings', function(data) {
-        if (data && data.snake_game_settings) {
-            const settings = data.snake_game_settings;
-            const lang = settings['lang'];
-            const speed = settings['speed'] ?? "3";
-            const border = settings['border'] ?? 'OFF';
-            if (settings['bestscore']) {
-                bestscore = settings['bestscore'];
-            }
-            $("select#lang").val(lang);
-            $("select#speed").val(speed);
-            $("select#border").val(border);
-        } else {
-            // first time set default parameters
+    chrome.storage.sync.get("snake_game_settings", function (data) {
+      if (data && data.snake_game_settings) {
+        const settings = data.snake_game_settings;
+        const lang = settings["lang"];
+        const speed = settings["speed"] ?? "3";
+        const border = settings["border"] ?? "OFF";
+        if (settings["bestscore"]) {
+          bestscore = settings["bestscore"];
         }
-        // about
-        // version number
-        $('textarea#about').val(get_text('application') + ': ' + app_name + '\n' + get_text('chrome_version') + ': ' + getChromeVersion());
+        $("select#lang").val(lang);
+        $("select#speed").val(speed);
+        $("select#border").val(border);
+      } else {
+        // first time set default parameters
+      }
+      // about
+      // version number
+      $("textarea#about").val(
+        get_text("application") +
+          ": " +
+          app_name +
+          "\n" +
+          get_text("chrome_version") +
+          ": " +
+          getChromeVersion()
+      );
 
-        // translate
-        ui_translate();
-        windowload();
-    });   
-    
+      // translate
+      ui_translate();
+      windowload();
+    });
+
     // save settings when button 'save' is clicked
-    $('button#setting_save_btn').click(function() {
-        saveSettings();
-        // translate
-        ui_translate();        
-    });         
-}, false);
+    $("button#setting_save_btn").click(function () {
+      saveSettings();
+      // translate
+      ui_translate();
+    });
+  },
+  false
+);

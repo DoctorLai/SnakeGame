@@ -1,6 +1,148 @@
+"use strict";
+
+/**
+ * Browser glue for the Snake game.
+ *
+ * All game logic lives in the dependency-free `SnakeEngine` module
+ * (js/engine.js). This file is only responsible for wiring that engine up to
+ * the DOM: reading the user's settings, handling the keyboard, rendering to the
+ * canvas and persisting the best score. Keeping it thin makes the logic
+ * unit-testable while this layer stays a simple, predictable adapter.
+ *
+ * Cross-file globals (declared in js/main.js): `bestscore`, `saveSettings`.
+ * Provided by js/engine.js: `SnakeEngine`.
+ */
+
+const CANVAS_SIZE = 400;
+const GRID = SnakeEngine.DEFAULTS.grid;
+
 let context;
 let canvas;
-let score = 0;
+let game;
+let frameCount = 0;
+let paused = false;
+let gameOver = false;
+let touchStart = null;
+
+function showScore(value) {
+  document.getElementById("score").innerHTML = value;
+}
+
+function showBestScore(value) {
+  document.getElementById("bestscore").innerHTML = value;
+}
+
+function getSetting(id) {
+  const el = document.getElementById(id);
+  return el ? el.value : null;
+}
+
+// Draw the current apple and snake. Called once per simulated tick.
+function render() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // apple
+  context.fillStyle = "red";
+  context.fillRect(game.apple.x, game.apple.y, GRID - 1, GRID - 1);
+
+  // snake
+  context.fillStyle = "green";
+  game.snake.cells.forEach(function (cell) {
+    context.fillRect(cell.x, cell.y, GRID - 1, GRID - 1);
+  });
+}
+
+// Translucent overlay shown while the game is paused.
+function renderPaused() {
+  context.fillStyle = "rgba(0, 0, 0, 0.5)";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "white";
+  context.font = "30px sans-serif";
+  context.textAlign = "center";
+  context.fillText(
+    typeof get_text === "function" ? get_text("paused", "Paused") : "Paused",
+    canvas.width / 2,
+    canvas.height / 2
+  );
+  context.textAlign = "start";
+}
+
+function togglePause() {
+  paused = !paused;
+  if (paused) {
+    renderPaused();
+  }
+}
+
+// Translucent "Game Over" overlay with the final score and a restart hint.
+function renderGameOver() {
+  context.fillStyle = "rgba(0, 0, 0, 0.6)";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "white";
+  context.textAlign = "center";
+
+  context.font = "32px sans-serif";
+  context.fillText(
+    typeof get_text === "function" ? get_text("game_over", "Game Over") : "Game Over",
+    canvas.width / 2,
+    canvas.height / 2 - 24
+  );
+
+  const scoreLabel =
+    (typeof get_text === "function" ? get_text("score_text", "Score") : "Score") +
+    ": " +
+    game.score;
+  context.font = "18px sans-serif";
+  context.fillText(scoreLabel, canvas.width / 2, canvas.height / 2 + 6);
+
+  context.font = "14px sans-serif";
+  context.fillText(
+    typeof get_text === "function"
+      ? get_text("restart_hint", "Press any key to restart")
+      : "Press any key to restart",
+    canvas.width / 2,
+    canvas.height / 2 + 34
+  );
+
+  context.textAlign = "start";
+}
+
+// Start a brand new game from the Game Over (or paused) state.
+function restartGame() {
+  gameOver = false;
+  paused = false;
+  frameCount = 0;
+  game.reset();
+  showScore(game.score);
+  render();
+}
+
+function onTouchStart(e) {
+  if (!e.changedTouches || e.changedTouches.length === 0) return;
+  const touch = e.changedTouches[0];
+  touchStart = { x: touch.clientX, y: touch.clientY };
+  e.preventDefault();
+}
+
+function onTouchEnd(e) {
+  if (gameOver) {
+    touchStart = null;
+    restartGame();
+    e.preventDefault();
+    return;
+  }
+  if (!touchStart || !e.changedTouches || e.changedTouches.length === 0) return;
+  const touch = e.changedTouches[0];
+  const keyCode = SnakeEngine.getSwipeKeyCode(touchStart, {
+    x: touch.clientX,
+    y: touch.clientY
+  });
+  touchStart = null;
+  if (keyCode) {
+    game.setDirection(keyCode);
+  }
+  e.preventDefault();
+}
 
 function windowload() {
   showBestScore(bestscore);
@@ -9,206 +151,67 @@ function windowload() {
   canvas.focus();
   context = canvas.getContext("2d");
 
-  // listen to keyboard events to move the snake
-  document.addEventListener("keydown", function(e) {
-    // prevent snake from backtracking on itself by checking that it's
-    // not already moving on the same axis (pressing left while moving
-    // left won't do anything, and pressing right while moving left
-    // shouldn't let you collide with your own body)
-
-    // left arrow key
-    if (e.which === 37 && snake.dx === 0) {
-      snake.dx = -grid;
-      snake.dy = 0;
-    }
-    // up arrow key
-    else if (e.which === 38 && snake.dy === 0) {
-      snake.dy = -grid;
-      snake.dx = 0;
-    }
-    // right arrow key
-    else if (e.which === 39 && snake.dx === 0) {
-      snake.dx = grid;
-      snake.dy = 0;
-    }
-    // down arrow key
-    else if (e.which === 40 && snake.dy === 0) {
-      snake.dy = grid;
-      snake.dx = 0;
-    }
+  game = new SnakeEngine.SnakeGame({
+    width: CANVAS_SIZE,
+    height: CANVAS_SIZE,
+    grid: GRID
   });
+  showScore(game.score);
+
+  // Keyboard: arrow keys / WASD steer the snake, space toggles pause.
+  document.addEventListener("keydown", function (e) {
+    const code = e.which || e.keyCode;
+    if (gameOver) {
+      e.preventDefault();
+      restartGame();
+      return;
+    }
+    if (code === SnakeEngine.KEY.SPACE) {
+      e.preventDefault();
+      togglePause();
+      return;
+    }
+    game.setDirection(code);
+  });
+  canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+  canvas.addEventListener("touchend", onTouchEnd, { passive: false });
 
   requestAnimationFrame(loop);
 }
 
-let grid = 16;
-let count = 0;
-
-let snake = {
-  x: 160,
-  y: 160,
-
-  // snake velocity. moves one grid length every frame in either the x or y direction
-  dx: grid,
-  dy: 0,
-
-  // keep track of all grids the snake body occupies
-  cells: [],
-
-  // length of the snake. grows when eating an apple
-  maxCells: 4
-};
-let apple = {
-  x: 320,
-  y: 320
-};
-
-if (Math.random() < 0.5) {
-  snake.dx = grid;
-  snake.dy = 0;
-} else {
-  snake.dx = 0;
-  snake.dy = grid;
-}
-
-// get random whole numbers in a specific range
-// @see https://stackoverflow.com/a/1527820/2124254
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function showScore(score) {
-  document.getElementById("score").innerHTML = score;
-}
-
-function showBestScore(score) {
-  document.getElementById("bestscore").innerHTML = score;
-}
-
-function resetGame() {
-  snake.x = 160;
-  snake.y = 160;
-  snake.cells = [];
-  snake.maxCells = 4;
-  if (Math.random() < 0.5) {
-    snake.dx = grid;
-    snake.dy = 0;
-  } else {
-    snake.dx = 0;
-    snake.dy = grid;
-  }
-  score = 0;
-  showScore(score);
-  apple.x = getRandomInt(0, 25) * grid;
-  apple.y = getRandomInt(0, 25) * grid;
-}
-
-// game loop
+// Main animation loop, throttled by frame-skipping to control the speed.
 function loop() {
   requestAnimationFrame(loop);
 
-  const FAST = 2;
-  const NORMAL = 3;
-  const SLOW = 4;
-
-  let speed = NORMAL;
-  const ui_speed = document.getElementById('speed').value;
-  if (ui_speed == 0) {
-    let bodylen = snake.cells.length;
-    if (bodylen >= 25) {
-      speed = FAST;
-    } else if (bodylen >= 15) {
-      speed = NORMAL;
-    } else {
-      speed = SLOW;
-    }
-  } else {
-    speed = parseInt(ui_speed);
-  }
-
-  // slow game loop to 30 fps instead of 60 (60/30 = 2)
-  if (++count < speed) {
+  if (paused || gameOver) {
     return;
   }
 
-  count = 0;
-  context.clearRect(0, 0, canvas.width, canvas.height);
-
-  // move snake by it's velocity
-  snake.x += snake.dx;
-  snake.y += snake.dy;
-
-
-  if (document.getElementById('border').value == "ON") {
-    // wrap snake position horizontally on edge of screen
-    if (snake.x < 0) {
-      snake.x = canvas.width - grid;
-    }
-    else if (snake.x >= canvas.width) {
-      snake.x = 0;
-    }
-    
-    // wrap snake position vertically on edge of screen
-    if (snake.y < 0) {
-      snake.y = canvas.height - grid;
-    }
-    else if (snake.y >= canvas.height) {
-      snake.y = 0;
-    }
+  const speed = SnakeEngine.computeSpeed(getSetting("speed"), game.snake.cells.length);
+  if (++frameCount < speed) {
+    return;
   }
+  frameCount = 0;
 
-  if (snake.x < 0 || snake.x >= canvas.width) {
-    resetGame();
+  // "Border ON" lets the snake pass through walls (wrap around).
+  const wrap = getSetting("border") === "ON";
+  const result = game.step({ wrap: wrap });
+
+  if (result.type === "dead") {
+    gameOver = true;
+    render();
+    renderGameOver();
     return;
   }
 
-  if (snake.y < 0 || snake.y >= canvas.height) {
-    resetGame();
-    return;
+  if (result.type === "eat") {
+    if (game.score > bestscore) {
+      bestscore = game.score;
+      saveSettings(false);
+    }
+    showBestScore(bestscore);
+    showScore(game.score);
   }
 
-  // keep track of where snake has been. front of the array is always the head
-  snake.cells.unshift({ x: snake.x, y: snake.y });
-
-  // remove cells as we move away from them
-  if (snake.cells.length > snake.maxCells) {
-    snake.cells.pop();
-  }
-
-  // draw apple
-  context.fillStyle = "red";
-  context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
-
-  // draw snake one cell at a time
-  context.fillStyle = "green";
-  snake.cells.forEach(function(cell, index) {
-    // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
-    context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
-
-    // snake ate apple
-    if (cell.x === apple.x && cell.y === apple.y) {
-      snake.maxCells++;
-
-      // canvas is 400x400 which is 25x25 grids
-      apple.x = getRandomInt(0, 25) * grid;
-      apple.y = getRandomInt(0, 25) * grid;
-
-      score++;
-      if (score > bestscore) {
-        bestscore = score;
-        saveSettings(false);
-      }
-      showBestScore(bestscore);
-      showScore(score);
-    }
-
-    // check collision with all cells after this one (modified bubble sort)
-    for (let i = index + 1; i < snake.cells.length; i++) {
-      // snake occupies same space as a body part. reset game
-      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-        resetGame();
-        return;
-      }
-    }
-  });
+  render();
 }

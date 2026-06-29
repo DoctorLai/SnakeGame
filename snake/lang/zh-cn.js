@@ -20,5 +20,8 @@ const translation_simplified_chinese = {
 	'last_updated': '最后更新',
 	'chrome_version': '浏览器版本',
 	'proudly_brought_to_you_by': '开发：',
-	'freevps': '云VPS促销活动'
+	'freevps': '云VPS促销活动',
+	'paused': '暂停',
+	'game_over': '游戏结束',
+	'restart_hint': '按任意键重新开始'
 };

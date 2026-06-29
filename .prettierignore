@@ -1,0 +1,18 @@
+node_modules/
+coverage/
+dist/
+*.zip
+
+# Vendored libraries
+snake/bs/
+snake/js/jquery.js
+snake/js/jquery-ui.min.js
+snake/css/jquery-ui*.css
+
+# Translation data is kept in its existing hand-edited format.
+snake/lang/
+snake/_locales/
+
+# Generated/minified assets
+snake/**/*.min.css
+snake/**/*.min.js

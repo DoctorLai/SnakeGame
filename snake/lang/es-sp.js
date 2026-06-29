@@ -20,5 +20,8 @@ const translation_es_sp = {
 	'last_updated': 'Última actualización',
 	'chrome_version': 'Versión de Chrome',
 	'proudly_brought_to_you_by': 'Desarrollado por',
-	'freevps': 'Promociones de VPS en la nube'
+	'freevps': 'Promociones de VPS en la nube',
+	'paused': 'Pausado',
+	'game_over': 'Juego terminado',
+	'restart_hint': 'Pulsa cualquier tecla para reiniciar'
 };
