@@ -1,1 +1,17 @@
+# Build artifacts
 *.zip
+dist/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+
+# Editor / OS
+.DS_Store
+.idea/
+*.log
+

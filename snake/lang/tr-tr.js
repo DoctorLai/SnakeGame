@@ -20,5 +20,8 @@ const translation_tr_tr = {
 	'last_updated': 'Son Güncelleme',
 	'chrome_version': 'Chrome Sürümü',
 	'proudly_brought_to_you_by': 'Geliştiren',
-	'freevps': 'Cloud VPS Promosyonları'
+	'freevps': 'Cloud VPS Promosyonları',
+	'paused': 'Duraklatıldı',
+	'game_over': 'Oyun bitti',
+	'restart_hint': 'Yeniden başlamak için bir tuşa basın'
 };

@@ -20,5 +20,8 @@ const translation_traditional_chinese = {
 	'last_updated': '最後更新',
 	'chrome_version': '瀏覽器版本',
 	'proudly_brought_to_you_by': '開發：',
-	'freevps': '雲VPS促銷活動'
+	'freevps': '雲VPS促銷活動',
+	'paused': '暫停',
+	'game_over': '遊戲結束',
+	'restart_hint': '按任意鍵重新開始'
 };

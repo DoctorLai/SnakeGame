@@ -20,5 +20,8 @@ const translation_ru_ru = {
 	'last_updated': 'Последнее обновление',
 	'chrome_version': 'Chrome Version',
 	'proudly_brought_to_you_by ':' Разработано ',
-	'freevps': 'Акции в облаке VPS'
+	'freevps': 'Акции в облаке VPS',
+	'paused': 'Пауза',
+	'game_over': 'Игра окончена',
+	'restart_hint': 'Нажмите любую клавишу для перезапуска'
 };

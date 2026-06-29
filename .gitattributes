@@ -1,0 +1,29 @@
+# Normalize line endings to LF on checkin; check out platform-native.
+* text=auto eol=lf
+
+# Explicitly treat common source/text files as text.
+*.js    text
+*.json  text
+*.html  text
+*.css   text
+*.md    text
+*.yml   text
+*.yaml  text
+
+# Binary assets must never be altered.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.zip   binary
+
+# Mark vendored / generated assets so GitHub language stats stay accurate
+# and diffs stay readable.
+snake/bs/**            linguist-vendored
+snake/js/jquery.js     linguist-vendored
+snake/js/jquery-ui.min.js linguist-vendored
+snake/css/jquery-ui*.css  linguist-vendored
+snake/lang/**          linguist-detectable=false
+*.min.js               linguist-generated
+*.min.css              linguist-generated
