@@ -7,7 +7,6 @@
 
 <p align="center">
   <a href="https://github.com/doctorlai/snakegame/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/doctorlai/snakegame/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://codecov.io/gh/doctorlai/snakegame"><img alt="Coverage" src="https://codecov.io/gh/doctorlai/snakegame/branch/master/graph/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
   <a href="https://nodejs.org"><img alt="Node.js" src="https://img.shields.io/badge/node-%3E%3D18-brightgreen"></a>
   <a href="snake/manifest.json"><img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-blue"></a>
