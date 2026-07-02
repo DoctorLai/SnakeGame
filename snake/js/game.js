@@ -23,6 +23,7 @@ let frameCount = 0;
 let paused = false;
 let gameOver = false;
 let touchStart = null;
+let fullscreenFallbackTimer = null;
 
 function showScore(value) {
   document.getElementById("score").innerHTML = value;
@@ -144,6 +145,120 @@ function onTouchEnd(e) {
   e.preventDefault();
 }
 
+// Fullscreen (browser play): scale the board up to fill the screen while the
+// engine keeps its fixed 400x400 resolution, so gameplay is unchanged. Uses the
+// standard Fullscreen API where available, with a Chrome-extension window
+// fallback for the constrained action popup.
+function isFullscreen() {
+  return !!(document.fullscreenElement || document.webkitFullscreenElement);
+}
+
+function getGamePageUrl() {
+  const base =
+    typeof chrome === "object" && chrome.runtime && chrome.runtime.getURL
+      ? chrome.runtime.getURL("main.html")
+      : window.location.href;
+  return SnakeEngine.withFullscreenHash(base);
+}
+
+function isFullscreenLayout() {
+  return isFullscreen() || window.location.hash === "#fullscreen";
+}
+
+function openBrowserWindow(url, state) {
+  const createData = { url: url, type: "popup", state: state, focused: true };
+  const onCreated = function (createdWindow) {
+    if (chrome.runtime.lastError) {
+      if (state === "fullscreen") {
+        openBrowserWindow(url, "maximized");
+      }
+      return;
+    }
+    if (createdWindow && createdWindow.id && state !== "fullscreen" && chrome.windows.update) {
+      chrome.windows.update(createdWindow.id, { state: "fullscreen", focused: true });
+    }
+  };
+  const result = chrome.windows.create(createData, onCreated);
+  if (result && typeof result.catch === "function") {
+    result.catch(function () {
+      if (state === "fullscreen") {
+        openBrowserWindow(url, "maximized");
+      }
+    });
+  }
+}
+
+function openFullscreenWindow(source) {
+  const url = getGamePageUrl();
+  if (typeof chrome === "object" && chrome.windows && chrome.windows.create) {
+    openBrowserWindow(url, "fullscreen");
+    return;
+  }
+  const opened = window.open(url, "_blank", "noopener,noreferrer,fullscreen=yes");
+  if (!opened && source) {
+    alert(
+      "Fullscreen was blocked. Open the game page in a browser tab, then click Fullscreen again."
+    );
+  }
+}
+
+function scheduleFullscreenFallback() {
+  clearTimeout(fullscreenFallbackTimer);
+  fullscreenFallbackTimer = setTimeout(function () {
+    if (!isFullscreen()) {
+      openFullscreenWindow("fallback");
+    }
+  }, 250);
+}
+
+function toggleFullscreen() {
+  const target = document.getElementById("tabs-canvas");
+  if (!target) return;
+  if (isFullscreen()) {
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if (exit) exit.call(document);
+    return;
+  }
+  const request = target.requestFullscreen || target.webkitRequestFullscreen;
+  if (!request) {
+    openFullscreenWindow("unsupported");
+    return;
+  }
+  try {
+    const result = request.call(target);
+    scheduleFullscreenFallback();
+    // Popup documents can reject fullscreen requests; open the game in a real
+    // fullscreen browser window instead of silently doing nothing.
+    if (result && typeof result.catch === "function") {
+      result
+        .then(function () {
+          clearTimeout(fullscreenFallbackTimer);
+        })
+        .catch(function () {
+          openFullscreenWindow("rejected");
+        });
+    }
+  } catch (err) {
+    openFullscreenWindow("thrown");
+  }
+}
+
+function onFullscreenChange() {
+  if (isFullscreen()) {
+    clearTimeout(fullscreenFallbackTimer);
+  }
+  const target = document.getElementById("tabs-canvas");
+  if (target) {
+    target.classList.toggle("fs-active", isFullscreenLayout());
+  }
+  if (document.body) {
+    document.body.classList.toggle("window-fullscreen", window.location.hash === "#fullscreen");
+  }
+  if (canvas) {
+    canvas.focus();
+  }
+}
+
 function windowload() {
   showBestScore(bestscore);
   canvas = document.getElementById("game");
@@ -157,6 +272,7 @@ function windowload() {
     grid: GRID
   });
   showScore(game.score);
+  onFullscreenChange();
 
   // Keyboard: arrow keys / WASD steer the snake, space toggles pause.
   document.addEventListener("keydown", function (e) {
@@ -175,6 +291,18 @@ function windowload() {
   });
   canvas.addEventListener("touchstart", onTouchStart, { passive: false });
   canvas.addEventListener("touchend", onTouchEnd, { passive: false });
+
+  // Fullscreen toggle. If the action popup rejects the Fullscreen API request,
+  // toggleFullscreen opens the game in a fullscreen Chrome window instead.
+  const fullscreenBtn = document.getElementById("text_fullscreen");
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener("click", function () {
+      toggleFullscreen();
+      this.blur();
+    });
+  }
+  document.addEventListener("fullscreenchange", onFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", onFullscreenChange);
 
   requestAnimationFrame(loop);
 }

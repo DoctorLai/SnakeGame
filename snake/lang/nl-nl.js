@@ -23,5 +23,6 @@ const translation_nl_nl = {
 	'freevps': 'Cloud VPS Promotions',
 	'paused': 'Gepauzeerd',
 	'game_over': 'Game over',
-	'restart_hint': 'Druk op een toets om opnieuw te starten'
+	'restart_hint': 'Druk op een toets om opnieuw te starten',
+	'fullscreen': 'Volledig scherm'
 };

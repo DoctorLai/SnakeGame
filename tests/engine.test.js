@@ -1,6 +1,9 @@
 "use strict";
 
 const engine = require("../snake/js/engine");
+const fs = require("fs");
+const path = require("path");
+const vm = require("vm");
 const {
   DEFAULTS,
   SPEED,
@@ -12,6 +15,7 @@ const {
   isOutOfBounds,
   getNextDirection,
   getSwipeKeyCode,
+  withFullscreenHash,
   placeApple,
   createSnake,
   SnakeGame
@@ -342,5 +346,84 @@ describe("SnakeGame", () => {
     expect(game.snake.cells).toEqual([]);
     expect(game.snake.maxCells).toBe(4);
     expect(isOutOfBounds(game.apple.x, game.apple.y, 400, 400)).toBe(false);
+  });
+
+  test("honours custom board geometry", () => {
+    const game = new SnakeGame({ width: 320, height: 240, grid: 16, rng: () => 0.2 });
+    expect(game.width).toBe(320);
+    expect(game.height).toBe(240);
+    expect(game.gridCount).toBe(20);
+  });
+
+  test("plays a short deterministic game end to end", () => {
+    const game = new SnakeGame({ rng: () => 0.2 }); // moving right
+    game.snake = { x: 160, y: 160, dx: 16, dy: 0, cells: [{ x: 160, y: 160 }], maxCells: 4 };
+    game.apple = { x: 176, y: 160 }; // directly ahead
+    game.rng = seq([0.5, 0.5]); // respawn the next apple mid-board
+
+    const eaten = game.step();
+    expect(eaten).toEqual({ type: "eat" });
+    expect(game.score).toBe(1);
+    expect(game.snake.maxCells).toBe(5);
+
+    const moved = game.step();
+    expect(moved).toEqual({ type: "move" });
+    expect(game.snake.cells[0]).toEqual({ x: 192, y: 160 });
+    expect(game.snake.cells.length).toBe(3);
+  });
+});
+
+describe("edge cases", () => {
+  test("computeSpeed accepts a numeric UI value", () => {
+    expect(computeSpeed(2, 0)).toBe(2);
+    expect(computeSpeed(0, 30)).toBe(SPEED.FAST);
+  });
+
+  test("getSwipeKeyCode triggers when the gesture exactly meets the threshold", () => {
+    expect(getSwipeKeyCode({ x: 0, y: 0 }, { x: 24, y: 0 })).toBe(KEY.RIGHT);
+    expect(getSwipeKeyCode({ x: 0, y: 0 }, { x: 0, y: 24 })).toBe(KEY.DOWN);
+  });
+
+  test("placeApple gives up after exhausting its retries on a full board", () => {
+    // A 1x1 board whose only cell is occupied: every candidate collides, so the
+    // loop must bail out after its retry budget rather than spin forever.
+    const apple = placeApple(1, 16, () => 0, [{ x: 0, y: 0 }]);
+    expect(apple).toEqual({ x: 0, y: 0 });
+  });
+});
+
+describe("withFullscreenHash", () => {
+  test("appends the fullscreen hash to a plain URL", () => {
+    expect(withFullscreenHash("https://x.dev/snake/main.html")).toBe(
+      "https://x.dev/snake/main.html#fullscreen"
+    );
+  });
+
+  test("replaces an existing hash so it stays idempotent", () => {
+    expect(withFullscreenHash("https://x.dev/main.html#fullscreen")).toBe(
+      "https://x.dev/main.html#fullscreen"
+    );
+    expect(withFullscreenHash("https://x.dev/main.html#other")).toBe(
+      "https://x.dev/main.html#fullscreen"
+    );
+  });
+
+  test("handles chrome-extension URLs", () => {
+    expect(withFullscreenHash("chrome-extension://abc/main.html")).toBe(
+      "chrome-extension://abc/main.html#fullscreen"
+    );
+  });
+});
+
+describe("module registration", () => {
+  test("registers SnakeEngine on the global object without a CommonJS module", () => {
+    const code = fs.readFileSync(path.join(__dirname, "../snake/js/engine.js"), "utf8");
+    const sandbox = {};
+    sandbox.self = sandbox; // emulate the browser global (window / self)
+    vm.createContext(sandbox);
+    vm.runInContext(code, sandbox);
+    expect(sandbox.SnakeEngine).toBeDefined();
+    expect(typeof sandbox.SnakeEngine.SnakeGame).toBe("function");
+    expect(sandbox.SnakeEngine.DEFAULTS).toEqual({ grid: 16, width: 400, height: 400 });
   });
 });

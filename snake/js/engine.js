@@ -10,6 +10,7 @@
  */
 (function (root, factory) {
   "use strict";
+  /* istanbul ignore else -- browser UMD global fallback, exercised by the vm-based test in tests/engine.test.js */
   if (typeof module === "object" && module.exports) {
     module.exports = factory();
   } else {
@@ -116,6 +117,15 @@
     if (Math.max(absX, absY) < minDistance) return null;
     if (absX > absY) return dx > 0 ? KEY.RIGHT : KEY.LEFT;
     return dy > 0 ? KEY.DOWN : KEY.UP;
+  }
+
+  /**
+   * Return the given page URL with the "#fullscreen" hash set, replacing any
+   * existing hash. Used by the browser fullscreen fallback so re-opening an
+   * already-fullscreen page stays idempotent (never "#fullscreen#fullscreen").
+   */
+  function withFullscreenHash(url) {
+    return String(url).replace(/#.*$/, "") + "#fullscreen";
   }
 
   /**
@@ -251,6 +261,7 @@
     isOutOfBounds: isOutOfBounds,
     getNextDirection: getNextDirection,
     getSwipeKeyCode: getSwipeKeyCode,
+    withFullscreenHash: withFullscreenHash,
     placeApple: placeApple,
     createSnake: createSnake,
     SnakeGame: SnakeGame

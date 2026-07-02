@@ -22,3 +22,70 @@ pre {
 #game {
   touch-action: none;
 }
+
+#hud-bar {
+  margin-bottom: 6px;
+}
+
+.fullscreen-btn {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.fullscreen-btn::before {
+  content: "⛶";
+  margin-right: 4px;
+}
+
+body.window-fullscreen {
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body.window-fullscreen .ext-window {
+  width: 100vw;
+  height: 100vh;
+}
+
+body.window-fullscreen #tabs {
+  border: 0;
+  padding: 0;
+}
+
+body.window-fullscreen #tabs > ul,
+body.window-fullscreen #tabs-setting,
+body.window-fullscreen #tabs-log,
+body.window-fullscreen #vpsdiv {
+  display: none;
+}
+
+/*
+ * Fullscreen mode. The `fs-active` class is toggled from js/game.js on the
+ * fullscreenchange event, so the styling works regardless of vendor prefixes.
+ * The board keeps its 400x400 internal resolution; only the display scales, so
+ * the game logic (and best scores) are unaffected. `min(88vh, 96vw)` keeps the
+ * square board as large as possible while leaving room for the score.
+ */
+#tabs-canvas.fs-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  background: #000;
+}
+
+#tabs-canvas.fs-active #hud-bar {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+#tabs-canvas.fs-active #game {
+  width: min(88vh, 96vw);
+  height: min(88vh, 96vw);
+  image-rendering: pixelated;
+}
