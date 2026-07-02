@@ -15,6 +15,7 @@ const {
   isOutOfBounds,
   getNextDirection,
   getSwipeKeyCode,
+  withFullscreenHash,
   placeApple,
   createSnake,
   SnakeGame
@@ -388,6 +389,29 @@ describe("edge cases", () => {
     // loop must bail out after its retry budget rather than spin forever.
     const apple = placeApple(1, 16, () => 0, [{ x: 0, y: 0 }]);
     expect(apple).toEqual({ x: 0, y: 0 });
+  });
+});
+
+describe("withFullscreenHash", () => {
+  test("appends the fullscreen hash to a plain URL", () => {
+    expect(withFullscreenHash("https://x.dev/snake/main.html")).toBe(
+      "https://x.dev/snake/main.html#fullscreen"
+    );
+  });
+
+  test("replaces an existing hash so it stays idempotent", () => {
+    expect(withFullscreenHash("https://x.dev/main.html#fullscreen")).toBe(
+      "https://x.dev/main.html#fullscreen"
+    );
+    expect(withFullscreenHash("https://x.dev/main.html#other")).toBe(
+      "https://x.dev/main.html#fullscreen"
+    );
+  });
+
+  test("handles chrome-extension URLs", () => {
+    expect(withFullscreenHash("chrome-extension://abc/main.html")).toBe(
+      "chrome-extension://abc/main.html#fullscreen"
+    );
   });
 });
 

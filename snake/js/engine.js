@@ -120,6 +120,15 @@
   }
 
   /**
+   * Return the given page URL with the "#fullscreen" hash set, replacing any
+   * existing hash. Used by the browser fullscreen fallback so re-opening an
+   * already-fullscreen page stays idempotent (never "#fullscreen#fullscreen").
+   */
+  function withFullscreenHash(url) {
+    return String(url).replace(/#.*$/, "") + "#fullscreen";
+  }
+
+  /**
    * Pick a random apple position that does not overlap the snake body.
    * @param {number} gridCount number of cells per axis (e.g. 25)
    * @param {number} grid cell size in pixels
@@ -252,6 +261,7 @@
     isOutOfBounds: isOutOfBounds,
     getNextDirection: getNextDirection,
     getSwipeKeyCode: getSwipeKeyCode,
+    withFullscreenHash: withFullscreenHash,
     placeApple: placeApple,
     createSnake: createSnake,
     SnakeGame: SnakeGame

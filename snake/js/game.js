@@ -154,11 +154,11 @@ function isFullscreen() {
 }
 
 function getGamePageUrl() {
-  const fullscreenHash = "#fullscreen";
-  if (typeof chrome === "object" && chrome.runtime && chrome.runtime.getURL) {
-    return chrome.runtime.getURL("main.html") + fullscreenHash;
-  }
-  return window.location.href.replace(/#.*$/, "") + fullscreenHash;
+  const base =
+    typeof chrome === "object" && chrome.runtime && chrome.runtime.getURL
+      ? chrome.runtime.getURL("main.html")
+      : window.location.href;
+  return SnakeEngine.withFullscreenHash(base);
 }
 
 function isFullscreenLayout() {
