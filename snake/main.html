@@ -17,6 +17,19 @@
     <script src="lang/pl-pl.js"></script>
     <script src="lang/pt-br.js"></script>
     <script src="lang/tr-tr.js"></script>
+    <script src="lang/ar.js"></script>
+    <script src="lang/bn.js"></script>
+    <script src="lang/fa.js"></script>
+    <script src="lang/hi.js"></script>
+    <script src="lang/id.js"></script>
+    <script src="lang/ja.js"></script>
+    <script src="lang/ko.js"></script>
+    <script src="lang/mr.js"></script>
+    <script src="lang/sw.js"></script>
+    <script src="lang/ta.js"></script>
+    <script src="lang/te.js"></script>
+    <script src="lang/th.js"></script>
+    <script src="lang/vi.js"></script>
     <script src="js/jquery.js"></script>
     <link href="bs/css/bootstrap.min.css" rel="stylesheet" />
     <script src="bs/js/bootstrap.min.js"></script>
@@ -36,8 +49,11 @@
         <li><a id="text_log" href="#tabs-log">Log</a></li>
       </ul>
       <div id="tabs-canvas">
-        <span id="score_text">Score</span>: <b><span id="score">0</span></b>
-        <span id="bestscore_text">Best</span>: <b><span id="bestscore">0</span></b>
+        <div id="hud-bar">
+          <span id="score_text">Score</span>: <b><span id="score">0</span></b>
+          <span id="bestscore_text">Best</span>: <b><span id="bestscore">0</span></b>
+          <button type="button" id="text_fullscreen" class="fullscreen-btn">Fullscreen</button>
+        </div>
         <canvas width="400" height="400" id="game"></canvas>
       </div>
 
@@ -57,6 +73,19 @@
           <option value="pl-pl">Polskie</option>
           <option value="pt-br">Português</option>
           <option value="tr-tr">Türk</option>
+          <option value="ar">العربية</option>
+          <option value="bn">বাংলা</option>
+          <option value="fa">فارسی</option>
+          <option value="hi">हिन्दी</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="mr">मराठी</option>
+          <option value="sw">Kiswahili</option>
+          <option value="ta">தமிழ்</option>
+          <option value="te">తెలుగు</option>
+          <option value="th">ไทย</option>
+          <option value="vi">Tiếng Việt</option>
         </select>
         <h4 id="text_speed">Speed</h4>
         <select class="form-control" id="speed" name="speed">
@@ -100,7 +129,7 @@
           ><img src="images/paypal.png" class="banner"
         /></a>
         &nbsp;
-        <a target="_blank" href="https://justyy.com/out/bitcoin"
+        <a target="_blank" href="https://buymeacoffee.com/y0btg5r/crypto-payment-accepted"
           ><img src="images/bitcoin.jpg" class="banner"
         /></a>
         &nbsp;
@@ -117,7 +146,7 @@
         /></a>
       </div>
       <div id="vpsdiv" style="text-align: center">
-        <a href="https://helloacm.com/out/buymecoffee" target="_blank"
+        <a href="https://buymeacoffee.com/y0btg5r" target="_blank"
           ><img src="images/lato-blue.png" alt="Buy Me A Coffee" style="height: 40px !important"
         /></a>
         <br />

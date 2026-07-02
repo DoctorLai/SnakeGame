@@ -10,6 +10,7 @@
  */
 (function (root, factory) {
   "use strict";
+  /* istanbul ignore else -- browser UMD global fallback, exercised by the vm-based test in tests/engine.test.js */
   if (typeof module === "object" && module.exports) {
     module.exports = factory();
   } else {

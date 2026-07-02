@@ -50,10 +50,36 @@ command on Node 18, 20 and 22.
 - Run `npm run check` before opening a pull request.
 - Keep pull requests focused and describe the motivation in the description.
 
+## Translations
+
+The project has two independent translation layers:
+
+- **In-app UI strings** live in [`snake/lang/`](snake/lang) as one `*.js` file
+  per language (for example `en-us.js`, `zh-cn.js`). To add a UI language, copy
+  an existing file, translate the values, register it in the `get_lang()` switch
+  in [`snake/js/translate.js`](snake/js/translate.js), and add an `<option>` to
+  the language selector in [`snake/main.html`](snake/main.html). When you add a
+  new UI string, add its key to **every** file so no language regresses.
+- **Chrome Web Store listing metadata** lives in
+  [`snake/_locales/`](snake/_locales) as `messages.json` files named by Chrome
+  locale code (for example `en`, `fr_FR`, `ja`). Only use
+  [locale codes Chrome supports](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales).
+
+`npm run check` intentionally skips the translation files, so please validate any
+JSON you add manually, e.g.
+`node -e "require('./snake/_locales/<code>/messages.json')"`.
+
+## Security
+
+Please do not report security vulnerabilities through public issues. Review the
+[Security Policy](SECURITY.md) and report them privately instead.
+
 ## Reporting bugs and requesting features
 
 Please use the issue templates under
-[`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE) when opening an issue.
+[`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE) when opening an issue, and fill
+in the [pull request template](.github/PULL_REQUEST_TEMPLATE.md) when you send a
+change.
 
 By contributing you agree that your contributions will be licensed under the
 [MIT License](LICENSE).

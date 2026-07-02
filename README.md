@@ -1,31 +1,43 @@
-<h1 align="center">Simple Snake Game</h1>
+<h1 align="left">Simple Snake Game</h1>
 
-<p align="center">
+<p align="left">
   The classic Snake game as a lightweight, offline, Manifest&nbsp;V3 Chrome extension -
   always one click away.
 </p>
 
-<p align="center">
+<p align="left">
   <a href="https://github.com/doctorlai/snakegame/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/doctorlai/snakegame/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
-  <a href="https://nodejs.org"><img alt="Node.js" src="https://img.shields.io/badge/node-%3E%3D18-brightgreen"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/doctorlai/snakegame?color=yellow"></a>
+  <a href="https://nodejs.org"><img alt="Node.js >= 18" src="https://img.shields.io/badge/node-%3E%3D18-brightgreen?logo=node.js&logoColor=white"></a>
   <a href="snake/manifest.json"><img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-blue"></a>
-  <a href="package.json"><img alt="Code style: Prettier" src="https://img.shields.io/badge/code%20style-prettier-ff69b4"></a>
+  <a href="package.json"><img alt="Code style: Prettier" src="https://img.shields.io/badge/code%20style-prettier-ff69b4?logo=prettier&logoColor=white"></a>
+  <a href="https://deepwiki.com/doctorlai/snakegame"><img alt="Ask DeepWiki" src="https://deepwiki.com/badge.svg"></a>
 </p>
 
-<p align="center">
+<p align="left">
   <a href="https://chromewebstore.google.com/detail/simple-snake-game/fbbeckekbefhhmabpfjgpjobkmnfjbec"><img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/v/fbbeckekbefhhmabpfjgpjobkmnfjbec?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white"></a>
   <a href="https://chromewebstore.google.com/detail/simple-snake-game/fbbeckekbefhhmabpfjgpjobkmnfjbec"><img alt="Users" src="https://img.shields.io/chrome-web-store/users/fbbeckekbefhhmabpfjgpjobkmnfjbec?label=users&color=success"></a>
   <a href="https://chromewebstore.google.com/detail/simple-snake-game/fbbeckekbefhhmabpfjgpjobkmnfjbec"><img alt="Rating" src="https://img.shields.io/chrome-web-store/rating/fbbeckekbefhhmabpfjgpjobkmnfjbec"></a>
-  <a href="https://github.com/doctorlai/snakegame/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/doctorlai/snakegame"></a>
+</p>
+
+<p align="left">
   <a href="https://github.com/doctorlai/snakegame/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/doctorlai/snakegame?style=social"></a>
   <a href="https://github.com/doctorlai/snakegame/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/doctorlai/snakegame?style=social"></a>
+  <a href="https://github.com/doctorlai/snakegame/watchers"><img alt="GitHub watchers" src="https://img.shields.io/github/watchers/doctorlai/snakegame?style=social"></a>
+</p>
+
+<p align="left">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/doctorlai/snakegame">
-  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/doctorlai/snakegame">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/doctorlai/snakegame">
+  <a href="https://github.com/doctorlai/snakegame/issues"><img alt="GitHub open issues" src="https://img.shields.io/github/issues/doctorlai/snakegame"></a>
+  <a href="https://github.com/doctorlai/snakegame/pulls"><img alt="GitHub open pull requests" src="https://img.shields.io/github/issues-pr/doctorlai/snakegame"></a>
+  <img alt="Top language" src="https://img.shields.io/github/languages/top/doctorlai/snakegame">
+  <img alt="Language count" src="https://img.shields.io/github/languages/count/doctorlai/snakegame">
+  <img alt="Code size" src="https://img.shields.io/github/languages/code-size/doctorlai/snakegame">
   <a href="CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
 </p>
 
-<p align="center">
+<p align="left">
   <img src="screenshot.jpg" alt="Simple Snake Game screenshot" width="420">
 </p>
 
@@ -39,19 +51,21 @@
 - **Wall mode toggle**: die on the walls or pass through them.
 - **Best-score tracking** synced across devices via `chrome.storage.sync`.
 - **Fair apple spawns** that never appear underneath the snake.
-- **13 languages** out of the box (see [Internationalization](#internationalization)).
+- **Fullscreen mode** for browser play: scale the board up to fill your screen.
+- **25 languages** out of the box (see [Internationalization](#internationalization)).
 - **Fully offline** and dependency-free at runtime: no tracking, no network calls.
 
 ## Controls
 
-| Action                    | Keyboard           | Touch       |
-| ------------------------- | ------------------ | ----------- |
-| Move up                   | `ArrowUp` / `W`    | Swipe up    |
-| Move down                 | `ArrowDown` / `S`  | Swipe down  |
-| Move left                 | `ArrowLeft` / `A`  | Swipe left  |
-| Move right                | `ArrowRight` / `D` | Swipe right |
-| Pause / resume            | `Space`            | -           |
-| Restart (after Game Over) | Any key            | Tap         |
+| Action                    | Keyboard           | Touch             |
+| ------------------------- | ------------------ | ----------------- |
+| Move up                   | `ArrowUp` / `W`    | Swipe up          |
+| Move down                 | `ArrowDown` / `S`  | Swipe down        |
+| Move left                 | `ArrowLeft` / `A`  | Swipe left        |
+| Move right                | `ArrowRight` / `D` | Swipe right       |
+| Pause / resume            | `Space`            | -                 |
+| Restart (after Game Over) | Any key            | Tap               |
+| Fullscreen (browser)      | `Esc` exits        | Fullscreen button |
 
 ## Play
 
@@ -132,8 +146,8 @@ snakegame/
 │   │   ├── main.js        # Settings + initialization
 │   │   ├── translate.js   # i18n helpers
 │   │   └── background.js  # Service worker
-│   ├── lang/              # UI translations (13 languages)
-│   ├── _locales/          # Chrome store locale metadata
+│   ├── lang/              # In-app UI translations (13 languages)
+│   ├── _locales/          # Chrome Web Store locale metadata (25 languages)
 │   ├── css/ / bs/         # Styles and Bootstrap
 │   └── images/
 ├── tests/                 # Jest unit tests
@@ -144,12 +158,16 @@ snakegame/
 
 ## Internationalization
 
-The UI is available in **13 languages**: English, Simplified Chinese,
-Traditional Chinese, French, Dutch, Spanish, Italian, Russian, German, Romanian,
-Polish, Portuguese (BR), and Turkish.
+Both the in-app UI (under [`snake/lang/`](snake/lang)) and the Chrome Web Store
+listing metadata (under [`snake/_locales/`](snake/_locales)) are localized into
+**25 languages**: English, Chinese (Simplified & Traditional), French, Dutch,
+Spanish, Italian, Russian, German, Romanian, Polish, Portuguese (BR), Turkish,
+Arabic, Bengali, Persian, Hindi, Indonesian, Japanese, Korean, Marathi, Swahili,
+Tamil, Telugu, Thai, and Vietnamese.
 
-Translations live in [`snake/lang/`](snake/lang), and contributions for new
-languages are very welcome.
+Contributions for new languages — or improvements to existing translations — are
+very welcome. See [CONTRIBUTING.md](CONTRIBUTING.md#translations) for how the two
+translation layers fit together.
 
 ## Ideas and roadmap
 
@@ -159,20 +177,27 @@ Want to help? These are great ways to contribute:
 - Selectable color themes.
 - Obstacles and difficulty levels.
 - Keyboard shortcut hints inside the settings tab.
-- Additional UI translations and Chrome Web Store locale metadata.
+- More languages beyond the current 25.
 
 Open an issue to discuss an idea before sending a larger pull request.
 
 ## Contributing
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and use
-the issue templates under [`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE).
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md), open an
+issue with one of the templates under
+[`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE), and follow the checklist in the
+[pull request template](.github/PULL_REQUEST_TEMPLATE.md) when you send a change.
+
+## Security
+
+Found a vulnerability? Please review our [Security Policy](SECURITY.md) and report
+it privately instead of opening a public issue.
 
 ## Support
 
 If you enjoy the game, consider supporting development and maintenance:
 
-- [Buy me a coffee](https://helloacm.com/out/buymecoffee)
+- [Buy me a coffee](https://buymeacoffee.com/y0btg5r)
 
 Many thanks!
 

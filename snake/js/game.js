@@ -144,6 +144,40 @@ function onTouchEnd(e) {
   e.preventDefault();
 }
 
+// Fullscreen (browser play): scale the board up to fill the screen while the
+// engine keeps its fixed 400x400 resolution, so gameplay is unchanged. Uses the
+// standard Fullscreen API with a WebKit fallback.
+function isFullscreen() {
+  return !!(document.fullscreenElement || document.webkitFullscreenElement);
+}
+
+function toggleFullscreen() {
+  const target = document.getElementById("tabs-canvas");
+  if (!target) return;
+  if (isFullscreen()) {
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if (exit) exit.call(document);
+    return;
+  }
+  const request = target.requestFullscreen || target.webkitRequestFullscreen;
+  if (!request) return;
+  const result = request.call(target);
+  // Fullscreen can be rejected (e.g. inside the extension popup); ignore that.
+  if (result && typeof result.catch === "function") {
+    result.catch(function () {});
+  }
+}
+
+function onFullscreenChange() {
+  const target = document.getElementById("tabs-canvas");
+  if (target) {
+    target.classList.toggle("fs-active", isFullscreen());
+  }
+  if (canvas) {
+    canvas.focus();
+  }
+}
+
 function windowload() {
   showBestScore(bestscore);
   canvas = document.getElementById("game");
@@ -175,6 +209,22 @@ function windowload() {
   });
   canvas.addEventListener("touchstart", onTouchStart, { passive: false });
   canvas.addEventListener("touchend", onTouchEnd, { passive: false });
+
+  // Fullscreen toggle. Hidden automatically where fullscreen is unavailable
+  // (such as the constrained extension popup), so it only shows for browser play.
+  const fullscreenBtn = document.getElementById("text_fullscreen");
+  if (fullscreenBtn) {
+    if (!document.fullscreenEnabled && !document.webkitFullscreenEnabled) {
+      fullscreenBtn.style.display = "none";
+    } else {
+      fullscreenBtn.addEventListener("click", function () {
+        toggleFullscreen();
+        this.blur();
+      });
+    }
+  }
+  document.addEventListener("fullscreenchange", onFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", onFullscreenChange);
 
   requestAnimationFrame(loop);
 }

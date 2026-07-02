@@ -23,5 +23,6 @@ const translation_tr_tr = {
 	'freevps': 'Cloud VPS Promosyonları',
 	'paused': 'Duraklatıldı',
 	'game_over': 'Oyun bitti',
-	'restart_hint': 'Yeniden başlamak için bir tuşa basın'
+	'restart_hint': 'Yeniden başlamak için bir tuşa basın',
+	'fullscreen': 'Tam ekran'
 };

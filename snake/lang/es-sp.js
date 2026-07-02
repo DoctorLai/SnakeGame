@@ -23,5 +23,6 @@ const translation_es_sp = {
 	'freevps': 'Promociones de VPS en la nube',
 	'paused': 'Pausado',
 	'game_over': 'Juego terminado',
-	'restart_hint': 'Pulsa cualquier tecla para reiniciar'
+	'restart_hint': 'Pulsa cualquier tecla para reiniciar',
+	'fullscreen': 'Pantalla completa'
 };

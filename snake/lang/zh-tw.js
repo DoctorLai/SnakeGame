@@ -23,5 +23,6 @@ const translation_traditional_chinese = {
 	'freevps': '雲VPS促銷活動',
 	'paused': '暫停',
 	'game_over': '遊戲結束',
-	'restart_hint': '按任意鍵重新開始'
+	'restart_hint': '按任意鍵重新開始',
+	'fullscreen': '全螢幕'
 };

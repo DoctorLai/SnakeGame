@@ -23,5 +23,6 @@ const translation_ro_ro = {
 	'freevps': 'Promoții cloud VPS',
 	'paused': 'Întrerupt',
 	'game_over': 'Joc terminat',
-	'restart_hint': 'Apăsați orice tastă pentru a reîncepe'
+	'restart_hint': 'Apăsați orice tastă pentru a reîncepe',
+	'fullscreen': 'Ecran complet'
 };

@@ -23,5 +23,6 @@ const translation_simplified_chinese = {
 	'freevps': '云VPS促销活动',
 	'paused': '暂停',
 	'game_over': '游戏结束',
-	'restart_hint': '按任意键重新开始'
+	'restart_hint': '按任意键重新开始',
+	'fullscreen': '全屏'
 };

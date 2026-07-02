@@ -24,6 +24,7 @@ const translation = (lang) => {
   translate_text($("span#vpspromotion"), lang, "freevps");
   translate_text($("h4#text_speed"), lang, "text_speed");
   translate_text($("h4#text_border"), lang, "text_border");
+  translate_text($("button#text_fullscreen"), lang, "fullscreen");
 };
 
 // get ui lang data
@@ -56,6 +57,32 @@ const get_lang = () => {
       return translation_ro_ro;
     case "tr-tr":
       return translation_tr_tr;
+    case "ar":
+      return translation_ar;
+    case "bn":
+      return translation_bn;
+    case "fa":
+      return translation_fa;
+    case "hi":
+      return translation_hi;
+    case "id":
+      return translation_id;
+    case "ja":
+      return translation_ja;
+    case "ko":
+      return translation_ko;
+    case "mr":
+      return translation_mr;
+    case "sw":
+      return translation_sw;
+    case "ta":
+      return translation_ta;
+    case "te":
+      return translation_te;
+    case "th":
+      return translation_th;
+    case "vi":
+      return translation_vi;
   }
 };
 
