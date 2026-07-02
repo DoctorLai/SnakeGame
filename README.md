@@ -146,7 +146,7 @@ snakegame/
 │   │   ├── main.js        # Settings + initialization
 │   │   ├── translate.js   # i18n helpers
 │   │   └── background.js  # Service worker
-│   ├── lang/              # In-app UI translations (13 languages)
+│   ├── lang/              # In-app UI translations (25 languages)
 │   ├── _locales/          # Chrome Web Store locale metadata (25 languages)
 │   ├── css/ / bs/         # Styles and Bootstrap
 │   └── images/
