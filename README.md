@@ -193,6 +193,12 @@ issue with one of the templates under
 Found a vulnerability? Please review our [Security Policy](SECURITY.md) and report
 it privately instead of opening a public issue.
 
+## Privacy
+
+Simple Snake Game is fully offline and collects no personal data — it only stores
+your game settings via `chrome.storage.sync`. See the [Privacy Policy](PRIVACY.md)
+for details.
+
 ## Support
 
 If you enjoy the game, consider supporting development and maintenance:
