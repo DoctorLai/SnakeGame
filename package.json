@@ -1,6 +1,6 @@
 {
   "name": "simple-snake-game",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Classic Snake game as a lightweight, offline, Manifest V3 Chrome extension.",
   "private": true,
   "scripts": {
