@@ -38,7 +38,8 @@
 </p>
 
 <p align="left">
-  <img src="screenshot.jpg" alt="Simple Snake Game screenshot" width="420">
+  <img height="450px" src="screenshot.jpg" alt="Simple Snake Game screenshot" width="420">
+  <img height="450px" src="https://github.com/user-attachments/assets/4f40a665-717d-4fc4-a256-36b494158470" />
 </p>
 
 ## Features
