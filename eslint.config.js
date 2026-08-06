@@ -25,7 +25,7 @@ const nodeGlobals = {
   console: "readonly"
 };
 
-const jestGlobals = {
+const testGlobals = {
   describe: "readonly",
   test: "readonly",
   it: "readonly",
@@ -34,7 +34,7 @@ const jestGlobals = {
   afterEach: "readonly",
   beforeAll: "readonly",
   afterAll: "readonly",
-  jest: "readonly"
+  vi: "readonly"
 };
 
 module.exports = [
@@ -82,12 +82,12 @@ module.exports = [
     }
   },
   {
-    // Jest test-suite.
+    // Vitest test suite.
     files: ["tests/**/*.js"],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: "commonjs",
-      globals: { ...nodeGlobals, ...jestGlobals }
+      globals: { ...nodeGlobals, ...testGlobals }
     }
   },
   {

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support guide
+    url: https://github.com/doctorlai/snakegame/blob/master/SUPPORT.md
+    about: Read installation help and support expectations before filing an issue.
+  - name: Report a security vulnerability
+    url: https://github.com/doctorlai/snakegame/security/advisories/new
+    about: Send sensitive vulnerability details privately to the maintainers.

@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Simple Snake Game",
+  "name": "__MSG_appName__",
   "default_locale": "en",
   "short_name": "SnakeGame",
-  "version": "1.4",
+  "version": "1.5",
   "action": {
     "default_icon": "icon.png",
-    "default_title": "Simple Snake Game",
+    "default_title": "__MSG_appName__",
     "default_popup": "main.html"
   },
   "offline_enabled": true,
@@ -17,7 +17,7 @@
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"
   },
-  "description": "Classic Snake Game in Your Browser",
+  "description": "__MSG_appDesc__",
   "web_accessible_resources": [
     {
       "resources": ["js/*", "images/*", "bs/*"],

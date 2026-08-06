@@ -2,7 +2,7 @@
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
-  # npm dev-dependencies (ESLint, Prettier, Jest, archiver).
+  # npm dev-dependencies (ESLint, Prettier, Vitest, archiver).
   - package-ecosystem: "npm"
     directory: "/"
     schedule:

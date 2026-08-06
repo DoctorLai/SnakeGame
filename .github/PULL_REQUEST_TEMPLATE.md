@@ -26,7 +26,7 @@ Closes #
 
 ## Checklist
 
-- [ ] I ran `npm run check` locally and it passed (lint + format + coverage).
+- [ ] I ran `npm run check` locally and it passed (lint, format, validation, coverage, and build).
 - [ ] I added or updated tests for any behaviour change in `snake/js/engine.js`.
 - [ ] Game logic changes live in `engine.js` so they stay testable.
 - [ ] I updated the documentation (README / CONTRIBUTING) where relevant.

@@ -1,0 +1,36 @@
+name: "Coverage Report"
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+jobs:
+  report:
+    name: Comment on pull request
+    if: github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout trusted workflow configuration
+        uses: actions/checkout@v7
+
+      - name: Download coverage report
+        uses: actions/download-artifact@v8
+        with:
+          name: coverage-report
+          path: coverage-artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Publish coverage report
+        uses: davelosert/vitest-coverage-report-action@8b157684c6a6b259b97d45e72b44242865c0f6a5 # v2.12.2
+        with:
+          file-coverage-mode: all
+          json-summary-path: coverage-artifact/coverage/coverage-summary.json
+          json-final-path: coverage-artifact/coverage/coverage-final.json
+          vite-config-path: coverage-artifact/vitest.config.mjs
