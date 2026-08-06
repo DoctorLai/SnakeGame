@@ -36,6 +36,36 @@ const expectedUiLanguages = new Set([
   "zh-cn",
   "zh-tw"
 ]);
+const expectedChromeLocales = new Set([
+  "ar",
+  "bn",
+  "de",
+  "en",
+  "en_GB",
+  "en_US",
+  "es",
+  "fa",
+  "fr",
+  "hi",
+  "id",
+  "it",
+  "ja",
+  "ko",
+  "mr",
+  "nl",
+  "pl",
+  "pt_BR",
+  "ro",
+  "ru",
+  "sw",
+  "ta",
+  "te",
+  "th",
+  "tr",
+  "vi",
+  "zh_CN",
+  "zh_TW"
+]);
 const supportedChromeLocales = new Set([
   "am",
   "ar",
@@ -219,8 +249,9 @@ function validateLocales(manifest) {
     .sort();
 
   assert(
-    localeNames.length >= 25,
-    `Expected at least 25 extension locales, found ${localeNames.length}`
+    localeNames.length === expectedChromeLocales.size &&
+      localeNames.every((localeName) => expectedChromeLocales.has(localeName)),
+    `Expected Chrome locales: ${Array.from(expectedChromeLocales).sort().join(", ")}`
   );
   assert(localeNames.includes(manifest.default_locale), "The manifest default_locale is missing");
   assert(manifest.name === "__MSG_appName__", "The manifest name is not localized");
@@ -245,11 +276,20 @@ function validateLocales(manifest) {
       `${path.relative(root, filePath)} does not match the default locale keys`
     );
     for (const key of ["appName", "appDesc"]) {
+      const maxLength = key === "appName" ? 75 : 132;
       assert(
         messages[key] && typeof messages[key].message === "string" && messages[key].message.trim(),
         `${path.relative(root, filePath)} has no ${key}.message`
       );
+      assert(
+        Array.from(messages[key].message).length <= maxLength,
+        `${path.relative(root, filePath)} ${key}.message exceeds ${maxLength} characters`
+      );
     }
+    assert(
+      messages.appDesc.message !== messages.appName.message,
+      `${path.relative(root, filePath)} repeats the app name as its description`
+    );
   }
   return localeNames.length;
 }

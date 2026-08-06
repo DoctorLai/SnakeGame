@@ -44,10 +44,8 @@ jobs:
               message: `${percentage.toFixed(1)}%`,
               color: "f1e05a"
             };
-            fs.writeFileSync(
-              ".github/badges/javascript.json",
-              `${JSON.stringify(badge, null, 2)}\n`
-            );
+            const badgeJson = `{ "schemaVersion": ${badge.schemaVersion}, "label": ${JSON.stringify(badge.label)}, "message": ${JSON.stringify(badge.message)}, "color": ${JSON.stringify(badge.color)} }\n`;
+            fs.writeFileSync(".github/badges/javascript.json", badgeJson);
 
       - name: Commit updated badge
         run: |

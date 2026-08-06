@@ -28,6 +28,11 @@ tooling. Chrome extension versions use the equivalent `major.minor` form.
 - Updated development dependencies and resolved all reported npm advisories.
 - Updated the supported release line to 1.5.x.
 
+### Fixed
+
+- Corrected unsupported Chrome locale directory codes and stale localized
+  extension names and descriptions.
+
 ## 1.4.0 - 2026-07-02
 
 ### Added
