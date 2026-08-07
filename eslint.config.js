@@ -22,6 +22,7 @@ const nodeGlobals = {
   exports: "writable",
   __dirname: "readonly",
   process: "readonly",
+  Buffer: "readonly",
   console: "readonly"
 };
 

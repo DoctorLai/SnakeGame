@@ -11,7 +11,7 @@
   <a href="https://nodejs.org"><img alt="Node.js 22.13+ or 24+" src="https://img.shields.io/badge/node-22.13%2B%20%7C%2024%2B-brightgreen?logo=node.js&logoColor=white"></a>
   <a href="snake/manifest.json"><img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-blue"></a>
   <a href="package.json"><img alt="Code style: Prettier" src="https://img.shields.io/badge/code%20style-prettier-ff69b4?logo=prettier&logoColor=white"></a>
-  <a href=".github/workflows/language-badge.yml"><img alt="JavaScript percentage" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdoctorlai%2Fsnakegame%2Fmaster%2F.github%2Fbadges%2Fjavascript.json"></a>
+  <a href=".github/workflows/language-badge.yml"><img alt="JavaScript percentage" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdoctorlai%2Fsnakegame%2Fbadges%2F.github%2Fbadges%2Fjavascript.json"></a>
   <a href="https://deepwiki.com/doctorlai/snakegame"><img alt="Ask DeepWiki" src="https://deepwiki.com/badge.svg"></a>
 </p>
 

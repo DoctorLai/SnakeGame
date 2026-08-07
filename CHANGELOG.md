@@ -32,6 +32,8 @@ tooling. Chrome extension versions use the equivalent `major.minor` form.
 
 - Corrected unsupported Chrome locale directory codes and stale localized
   extension names and descriptions.
+- Re-encoded extension icons without legacy metadata so the Chrome Web Store can
+  process the release package.
 
 ## 1.4.0 - 2026-07-02
 
