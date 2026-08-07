@@ -8,9 +8,10 @@
 <p align="left">
   <a href="https://github.com/doctorlai/snakegame/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/doctorlai/snakegame/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/doctorlai/snakegame?color=yellow"></a>
-  <a href="https://nodejs.org"><img alt="Node.js >= 18" src="https://img.shields.io/badge/node-%3E%3D18-brightgreen?logo=node.js&logoColor=white"></a>
+  <a href="https://nodejs.org"><img alt="Node.js 22.13+ or 24+" src="https://img.shields.io/badge/node-22.13%2B%20%7C%2024%2B-brightgreen?logo=node.js&logoColor=white"></a>
   <a href="snake/manifest.json"><img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-blue"></a>
   <a href="package.json"><img alt="Code style: Prettier" src="https://img.shields.io/badge/code%20style-prettier-ff69b4?logo=prettier&logoColor=white"></a>
+  <a href=".github/workflows/language-badge.yml"><img alt="JavaScript percentage" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdoctorlai%2Fsnakegame%2Fmaster%2F.github%2Fbadges%2Fjavascript.json"></a>
   <a href="https://deepwiki.com/doctorlai/snakegame"><img alt="Ask DeepWiki" src="https://deepwiki.com/badge.svg"></a>
 </p>
 
@@ -33,6 +34,7 @@
   <a href="https://github.com/doctorlai/snakegame/pulls"><img alt="GitHub open pull requests" src="https://img.shields.io/github/issues-pr/doctorlai/snakegame"></a>
   <img alt="Top language" src="https://img.shields.io/github/languages/top/doctorlai/snakegame">
   <img alt="Language count" src="https://img.shields.io/github/languages/count/doctorlai/snakegame">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/doctorlai/snakegame">
   <img alt="Code size" src="https://img.shields.io/github/languages/code-size/doctorlai/snakegame">
   <a href="CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
 </p>
@@ -86,6 +88,7 @@
 ```bash
 git clone https://github.com/doctorlai/snakegame.git
 cd snakegame
+nvm use
 npm install
 ```
 
@@ -99,6 +102,7 @@ npm install
 | Auto-fix lint          | `npm run lint:fix`     |
 | Format files           | `npm run format`       |
 | Check formatting only  | `npm run format:check` |
+| Validate metadata/i18n | `npm run validate`     |
 | Build the store `.zip` | `npm run build`        |
 | Check, then build      | `npm run release`      |
 
@@ -123,16 +127,19 @@ expects. Use `npm run release` to run the full check suite before packaging.
 
 ## Quality checks
 
-The engine is covered by a [Jest](https://jestjs.io/) test suite under
+The engine is covered by a [Vitest](https://vitest.dev/) test suite under
 [`tests/`](tests). Coverage thresholds, ESLint, and Prettier formatting are
-enforced locally and in CI:
+enforced locally and in CI. The aggregate check also validates package metadata,
+all translation files, and the production archive:
 
 ```bash
 npm run check
 ```
 
-Continuous integration runs the full check command on Node 18, 20 and 22 for
-every push and pull request via [GitHub Actions](.github/workflows/ci.yml).
+Continuous integration runs the full check command on Node 22 and 24 for
+every push and pull request via [GitHub Actions](.github/workflows/ci.yml). Pull
+requests also receive a detailed, automatically updated coverage comment from
+the [coverage reporting workflow](.github/workflows/coverage-report.yml).
 
 ## Project structure
 
@@ -151,7 +158,7 @@ snakegame/
 │   ├── _locales/          # Chrome Web Store locale metadata (25 languages)
 │   ├── css/ / bs/         # Styles and Bootstrap
 │   └── images/
-├── tests/                 # Jest unit tests
+├── tests/                 # Vitest unit tests
 ├── scripts/               # Build tooling (store .zip packaging)
 ├── .github/workflows/     # CI pipeline
 └── package.json
@@ -169,6 +176,10 @@ Tamil, Telugu, Thai, and Vietnamese.
 Contributions for new languages — or improvements to existing translations — are
 very welcome. See [CONTRIBUTING.md](CONTRIBUTING.md#translations) for how the two
 translation layers fit together.
+
+`npm run validate` checks that every locale is valid, every UI translation has
+the same keys, and every language is registered in the page and translation
+switch.
 
 ## Ideas and roadmap
 
@@ -202,11 +213,19 @@ for details.
 
 ## Support
 
-If you enjoy the game, consider supporting development and maintenance:
+For installation help, bug reports, and feature requests, see
+[SUPPORT.md](SUPPORT.md). Security issues must follow the private process in
+[SECURITY.md](SECURITY.md).
+
+If you enjoy the game, you can also support development and maintenance:
 
 - [Buy me a coffee](https://buymeacoffee.com/y0btg5r)
 
 Many thanks!
+
+## Changelog
+
+Release notes are maintained in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

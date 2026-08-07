@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Juego de serpiente",
+    "description": "El nombre localizado de la extensión."
+  },
+  "appDesc": {
+    "message": "El clásico juego de la serpiente en tu navegador",
+    "description": "Una descripción breve de la extensión."
+  }
+}

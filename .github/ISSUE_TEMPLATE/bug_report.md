@@ -1,40 +1,43 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ""
+about: Report a reproducible problem with the extension
+title: "[Bug]: "
 labels: ""
 assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Before submitting
 
-**To Reproduce**
-Steps to reproduce the behavior:
+- [ ] I am using the latest release or the latest revision from `master`.
+- [ ] I searched open and closed issues for the same problem.
+- [ ] This is not a security vulnerability (see `SECURITY.md` for private reporting).
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## What happened?
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+Describe the problem clearly and concisely.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Steps to reproduce
 
-**Desktop (please complete the following information):**
+1.
+2.
+3.
 
-- OS: [e.g. iOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
+## Expected behavior
 
-**Smartphone (please complete the following information):**
+What did you expect to happen instead?
 
-- Device: [e.g. iPhone6]
-- OS: [e.g. iOS8.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
+## Environment
 
-**Additional context**
-Add any other context about the problem here.
+- Extension version (shown on the Log tab):
+- Installation source (Chrome Web Store or unpacked):
+- Chrome/Chromium version:
+- Operating system:
+
+## Logs and screenshots
+
+Add screenshots, recordings, or relevant popup/service-worker console output.
+Remove personal information before posting.
+
+## Additional context
+
+Add anything else that may help reproduce or diagnose the problem.

@@ -1,0 +1,56 @@
+name: Update Language Badge
+
+on:
+  push:
+    branches: ["master"]
+    paths-ignore:
+      - ".github/badges/javascript.json"
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: language-badge
+  cancel-in-progress: true
+
+jobs:
+  update:
+    name: Calculate JavaScript percentage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Update badge data
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require("fs");
+            const { data } = await github.rest.repos.listLanguages({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            const total = Object.values(data).reduce((sum, bytes) => sum + bytes, 0);
+            const percentage = total === 0 ? 0 : ((data.JavaScript ?? 0) / total) * 100;
+            const badge = {
+              schemaVersion: 1,
+              label: "JavaScript",
+              message: `${percentage.toFixed(1)}%`,
+              color: "f1e05a"
+            };
+            const badgeJson = `{ "schemaVersion": ${badge.schemaVersion}, "label": ${JSON.stringify(badge.label)}, "message": ${JSON.stringify(badge.message)}, "color": ${JSON.stringify(badge.color)} }\n`;
+            fs.writeFileSync(".github/badges/javascript.json", badgeJson);
+
+      - name: Commit updated badge
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/badges/javascript.json
+          git diff --cached --quiet || git commit -m "chore: update language badge"
+          git push

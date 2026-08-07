@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Einfaches Schlangenspiel",
+    "description": "Der lokalisierte Name der Erweiterung."
+  },
+  "appDesc": {
+    "message": "Klassisches Schlangenspiel direkt in Ihrem Browser",
+    "description": "Eine kurze Beschreibung der Erweiterung."
+  }
+}

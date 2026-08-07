@@ -8,6 +8,7 @@ Chrome extension, so getting started is quick.
 ```bash
 git clone https://github.com/doctorlai/snakegame.git
 cd snakegame
+nvm use
 npm install
 ```
 
@@ -23,11 +24,12 @@ npm install
 | Auto-fix lint issues       | `npm run lint:fix`     |
 | Format files               | `npm run format`       |
 | Check formatting only      | `npm run format:check` |
+| Validate metadata and i18n | `npm run validate`     |
 | Build the store `.zip`     | `npm run build`        |
 | Check, then build          | `npm run release`      |
 
 Please run `npm run check` before opening a pull request; CI runs the same
-command on Node 18, 20 and 22.
+command on Node 22 and 24.
 
 ### Loading the extension locally
 
@@ -41,7 +43,7 @@ command on Node 18, 20 and 22.
 - `snake/js/engine.js` — pure, framework-free game logic (fully unit-tested).
 - `snake/js/game.js` — thin DOM/Canvas adapter that drives the engine.
 - `snake/js/main.js`, `translate.js`, `background.js` — settings, i18n, service worker.
-- `tests/` — Jest unit tests for the engine.
+- `tests/` — Vitest unit tests for the engine.
 
 ## Guidelines
 
@@ -62,12 +64,21 @@ The project has two independent translation layers:
   new UI string, add its key to **every** file so no language regresses.
 - **Chrome Web Store listing metadata** lives in
   [`snake/_locales/`](snake/_locales) as `messages.json` files named by Chrome
-  locale code (for example `en`, `fr_FR`, `ja`). Only use
+  locale code (for example `en`, `fr`, `ja`). Only use
   [locale codes Chrome supports](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales).
 
-`npm run check` intentionally skips the translation files, so please validate any
-JSON you add manually, e.g.
-`node -e "require('./snake/_locales/<code>/messages.json')"`.
+`npm run validate` parses every locale file and checks that all in-app
+translations use the English key set and are registered in both `main.html` and
+`translate.js`. Run it directly while translating, then run `npm run check`
+before opening a pull request.
+
+## Preparing a release
+
+Maintainers should update both version fields: use `x.y.0` in `package.json` and
+the Chrome-compatible `x.y` form in `snake/manifest.json`. `npm run validate`
+rejects version drift. Add the release date and notable changes to
+[CHANGELOG.md](CHANGELOG.md), then run `npm run release` to validate and package
+the extension.
 
 ## Security
 
@@ -79,7 +90,8 @@ Please do not report security vulnerabilities through public issues. Review the
 Please use the issue templates under
 [`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE) when opening an issue, and fill
 in the [pull request template](.github/PULL_REQUEST_TEMPLATE.md) when you send a
-change.
+change. General help and support expectations are documented in
+[SUPPORT.md](SUPPORT.md).
 
 By contributing you agree that your contributions will be licensed under the
 [MIT License](LICENSE).

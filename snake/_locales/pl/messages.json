@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Prosta gra w węża",
+    "description": "Zlokalizowana nazwa rozszerzenia."
+  },
+  "appDesc": {
+    "message": "Klasyczna gra w węża w przeglądarce",
+    "description": "Krótki opis rozszerzenia."
+  }
+}

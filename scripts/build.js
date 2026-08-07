@@ -12,7 +12,6 @@
 
 const fs = require("fs");
 const path = require("path");
-const archiver = require("archiver");
 
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "snake");
@@ -27,7 +26,7 @@ function readVersion() {
   return manifest.version;
 }
 
-function build() {
+async function build() {
   if (!fs.existsSync(path.join(sourceDir, "manifest.json"))) {
     throw new Error(`Extension source not found at ${sourceDir}`);
   }
@@ -43,7 +42,8 @@ function build() {
   }
 
   const output = fs.createWriteStream(outFile);
-  const archive = archiver("zip", { zlib: { level: 9 } });
+  const { ZipArchive } = await import("archiver");
+  const archive = new ZipArchive({ zlib: { level: 9 } });
 
   return new Promise((resolve, reject) => {
     output.on("close", () => {
