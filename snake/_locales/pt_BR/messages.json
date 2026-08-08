@@ -1,10 +1,10 @@
 {
   "appName": {
     "message": "Jogo Simples de Cobra",
-    "description": "Jogo simples de cobra: fácil acesso quando você quer jogar o clássico jogo de cobra."
+    "description": "O nome localizado da extensão."
   },
   "appDesc": {
-    "message": "Jogo simples de cobra: fácil acesso quando você quer jogar o clássico jogo de cobra.",
-    "description": "Jogo simples de cobra: fácil acesso quando você quer jogar o clássico jogo de cobra."
+    "message": "Jogue o clássico jogo da cobrinha no navegador.",
+    "description": "Uma breve descrição da extensão."
   }
 }

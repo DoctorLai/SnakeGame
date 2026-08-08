@@ -3,9 +3,17 @@
 All notable changes to Simple Snake Game are documented here.
 
 The project follows [Semantic Versioning](https://semver.org/) for development
-tooling. Chrome extension versions use the equivalent `major.minor` form.
+tooling. Chrome extension packages use the matching numeric version.
 
 ## Unreleased
+
+## 1.5.1 - 2026-08-08
+
+### Changed
+
+- Replaced the keyword-style language enumeration with concise, feature-focused
+  Chrome Web Store description copy.
+- Bumped the extension package version for policy resubmission.
 
 ## 1.5.0 - 2026-08-06
 

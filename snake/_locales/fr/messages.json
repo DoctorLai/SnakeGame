@@ -1,10 +1,10 @@
 {
   "appName": {
     "message": "Simple Snake Game",
-    "description": "Jeu de serpent simple: facile d'accès lorsque vous voulez jouer au jeu de serpent classique."
+    "description": "Le nom localisé de l'extension."
   },
   "appDesc": {
-    "message": "Jeu de serpent simple: facile d'accès lorsque vous voulez jouer au jeu de serpent classique.",
-    "description": "Jeu de serpent simple: facile d'accès lorsque vous voulez jouer au jeu de serpent classique."
+    "message": "Jouez au jeu Snake classique dans votre navigateur.",
+    "description": "Une brève description de l'extension."
   }
 }
