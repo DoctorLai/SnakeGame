@@ -1,10 +1,10 @@
 {
   "appName": {
     "message": "Simple Snake Game",
-    "description": "Simple Snake Game: Easy accessible when you want to play the classic snake game."
+    "description": "The localised extension name."
   },
   "appDesc": {
-    "message": "Classic Snake game in your browser.",
-    "description": "Simple Snake Game: Easy accessible when you want to play the classic snake game."
+    "message": "Play the classic Snake game in your browser.",
+    "description": "A short description of the extension."
   }
 }

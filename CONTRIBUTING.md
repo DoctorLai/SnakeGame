@@ -62,10 +62,13 @@ The project has two independent translation layers:
   in [`snake/js/translate.js`](snake/js/translate.js), and add an `<option>` to
   the language selector in [`snake/main.html`](snake/main.html). When you add a
   new UI string, add its key to **every** file so no language regresses.
-- **Chrome Web Store listing metadata** lives in
+- **Localized extension metadata** lives in
   [`snake/_locales/`](snake/_locales) as `messages.json` files named by Chrome
   locale code (for example `en`, `fr`, `ja`). Only use
   [locale codes Chrome supports](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales).
+- **Chrome Web Store description copy** lives in
+  [`store-listing/description.md`](store-listing/description.md). Keep it
+  concise and focused on the extension's functionality.
 
 `npm run validate` parses every locale file and checks that all in-app
 translations use the English key set and are registered in both `main.html` and
@@ -74,8 +77,8 @@ before opening a pull request.
 
 ## Preparing a release
 
-Maintainers should update both version fields: use `x.y.0` in `package.json` and
-the Chrome-compatible `x.y` form in `snake/manifest.json`. `npm run validate`
+Maintainers should use the same numeric version in `package.json` and
+`snake/manifest.json`. `npm run validate`
 rejects version drift. Add the release date and notable changes to
 [CHANGELOG.md](CHANGELOG.md), then run `npm run release` to validate and package
 the extension.

@@ -123,7 +123,9 @@ This writes `dist/simple-snake-game-v<version>.zip` (the version is read from
 [`snake/manifest.json`](snake/manifest.json)). The archive contains the contents
 of [`snake/`](snake) with `manifest.json` at its root, which is exactly what the
 [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
-expects. Use `npm run release` to run the full check suite before packaging.
+expects. Use `npm run release` to run the full check suite before packaging. When
+submitting the archive, use [`store-listing/description.md`](store-listing/description.md)
+as the dashboard description.
 
 ## Quality checks
 
@@ -166,12 +168,10 @@ snakegame/
 
 ## Internationalization
 
-Both the in-app UI (under [`snake/lang/`](snake/lang)) and the Chrome Web Store
-listing metadata (under [`snake/_locales/`](snake/_locales)) are localized into
-**25 languages**: English, Chinese (Simplified & Traditional), French, Dutch,
-Spanish, Italian, Russian, German, Romanian, Polish, Portuguese (BR), Turkish,
-Arabic, Bengali, Persian, Hindi, Indonesian, Japanese, Korean, Marathi, Swahili,
-Tamil, Telugu, Thai, and Vietnamese.
+Both the in-app UI (under [`snake/lang/`](snake/lang)) and extension metadata
+(under [`snake/_locales/`](snake/_locales)) are localized into **25 languages**.
+Language availability is presented through Chrome's localization controls rather
+than repeated as keywords in the store description.
 
 Contributions for new languages — or improvements to existing translations — are
 very welcome. See [CONTRIBUTING.md](CONTRIBUTING.md#translations) for how the two

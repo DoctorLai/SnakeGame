@@ -1,0 +1,1 @@
+Play the classic Snake game directly in Chrome. Control the snake with the arrow keys, WASD, or touch gestures. Choose the game speed and wall behavior, pause and resume at any time, track your best score, and switch to fullscreen play. The game works offline and does not collect or transmit personal data.
