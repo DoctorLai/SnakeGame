@@ -7,6 +7,13 @@ tooling. Chrome extension packages use the matching numeric version.
 
 ## Unreleased
 
+## 1.5.2 - 2026-08-10
+
+### Changed
+
+- Tightened the Chrome Web Store description to concise, feature-only copy.
+- Bumped the extension package version for policy resubmission.
+
 ## 1.5.1 - 2026-08-08
 
 ### Changed
