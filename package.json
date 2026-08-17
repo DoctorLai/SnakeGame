@@ -42,7 +42,7 @@
     "@eslint/js": "^10.0.1",
     "@vitest/coverage-v8": "^4.1.10",
     "archiver": "^8.0.0",
-    "eslint": "^10.8.0",
+    "eslint": "^10.8.1",
     "pngjs": "^7.0.0",
     "prettier": "^3.9.6",
     "vitest": "^4.1.10"
